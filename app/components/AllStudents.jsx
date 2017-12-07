@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import AddStudent from "./AddStudent"
 
 export default class AllStudents extends Component {
     constructor () {
@@ -11,7 +12,6 @@ export default class AllStudents extends Component {
     }
 
 
-
     componentDidMount() {
         axios.get('/api/students')
         .then(res => res.data)
@@ -20,23 +20,25 @@ export default class AllStudents extends Component {
 
 
     render () {
-
-        const campusId = Number(this.props.match.params.campusId)
-        const students = this.state.students
-        const filteredStudents = students.filter(student => student.campusId === campusId)
-
+        const students = this.state.students;
+        
         return (
             
             <div>
+            <h1>Welcome to the All Students component</h1>
+            <AddStudent />
+            <ul>
             {students.map(student => {
                 return (
-                    <div className="student-item" key={student.id}>
+                    <li className="student-item" key={student.id}>
                     <Link to={`/students/${student.id}`}>{student.name}</Link>
-                    </div>
-                )
+                    </li>)
             })}
+            </ul>
             </div>
             
         )
     }
 }
+
+

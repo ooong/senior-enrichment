@@ -4,6 +4,8 @@ import axios from 'axios'
 import AllCampuses from './AllCampuses'
 import Navbar from './Navbar'
 import AllStudents from './AllStudents'
+import SingleStudent from './SingleStudent';
+import SingleCampus from './SingleCampus';
 
 
 
@@ -24,13 +26,15 @@ export default class Main extends Component {
 
             <div>
                 <Navbar />
-                <h2>Welcome to the main component</h2>
                 <main>
                     <Switch>
-                        <Route path="/campuses/:campusId" component={AllStudents}/>
+                        <Route exact path="/campuses" component={AllCampuses}/>
+                        <Route path="/campuses/:campusId" component={SingleCampus}/>
+                        <Route exact path="/students" component={AllStudents}/>
+                        <Route path="/students/:studentId" component={SingleStudent}/>
+                        <Redirect to="/campuses" />
                     </Switch>
                 </main>
-                <AllCampuses />
             </div>
 
         )

@@ -26,13 +26,16 @@ export default class AllCampuses extends Component {
         return (
             
             <div>
+            <h1>Welcome to the All Campuses component</h1>
+            <ul>
             {campuses.map(campus => {
                 return (
-                    <div className="campus-item" key={campus.id}>
+                    <li className="campus-item" key={campus.id}>
                     <Link to={`/campuses/${campus.id}`}>{campus.name}</Link>
-                    </div>
+                    </li>
                 )
             })}
+            </ul>
             </div>
             
         )

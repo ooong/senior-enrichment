@@ -15,7 +15,7 @@ studentRouter.get('/', function (req, res, next) {
 // GET api/students/:id
 studentRouter.get('/:id', function (req, res, next) {
     Student.findOne({where: {id: req.params.id}})
-    .then(student => res.json(student.name))
+    .then(student => res.json(student))
     // res.send("student test!");
 })
 

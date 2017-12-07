@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Navbar = () => {
     return (
-        <div>
+        <div className="nav-bar">
             <section>
                 <h4 className="nav-item">
                     <NavLink to="./students">STUDENTS</NavLink>
