@@ -1,5 +1,8 @@
 import React, { Component} from 'react'
 import axios from 'axios'
+import AllStudents from './AllStudents'
+import { Link } from 'react-router-dom'
+import EditCampus from './EditCampus'
 
 
 export default class SingleCampus extends Component {
@@ -38,7 +41,13 @@ export default class SingleCampus extends Component {
                 <h2>CampusName: {campus.name}</h2>
                 <h3>CampusId: {campus.id}</h3>
                 <h3>CampusDescription: {campus.description}</h3>
-            
+                <h3>Students:</h3>
+                <ul>
+                    <li>placeholder student 1</li>
+                    <li>placeholder student 2</li>
+                    <li>placeholder student 3</li>
+                </ul>
+                <EditCampus campus={this.state.campus}/>
             </div>
         )
     }

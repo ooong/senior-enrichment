@@ -1,16 +1,27 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import AllCampuses from './AllCampuses'
 
 export default class AddStudent extends Component {
     constructor() {
         super();
         this.state = {
-            studentName: "",
-            studentCampus: ""
+            firstName: "",
+            lastName: "",
+            email: "",
+            studentCampus: {},
+            campuses: []
 
         }
+       
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount () {
+        axios.get('/api/campuses')
+        .then(res => res.data)
+        .then(campuses => this.setState({ campuses }))
     }
 
 
@@ -26,12 +37,18 @@ export default class AddStudent extends Component {
     handleSubmit(event) {
         // save this.state.value to the database as a new student
         event.preventDefault();
-        console.log('this.state', this.state);
+        // axios.post('api/students', {
+        //     firstName: 
+        // })
 
     }
 
 
     render() {
+
+        const campuses = this.state.campuses
+        console.log("campuses",campuses)
+
         return (
 
             <form id="new-student-form" onSubmit={this.handleSubmit}>
@@ -50,9 +67,12 @@ export default class AddStudent extends Component {
                         value={this.state.studentCampus}
                         onChange={this.handleChange}
                         >
-                        <option value="campus1">Campus1</option>
-                        <option value="campus2">Campus2</option>
-                        <option value="campus3">Campus3</option>
+                        {campuses.map(campus => {
+                            return (
+                                <option className="campus-option" key={campus.id}>
+                                {campus.name}
+                                </option>)
+                        })}
                     </select>
                     
                     <span className="input-group-btn">

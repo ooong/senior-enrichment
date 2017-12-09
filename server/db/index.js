@@ -19,4 +19,6 @@ const db = require('./db');
 module.exports = db;
 
 Student.belongsTo(Campus)
-Campus.hasMany(Student) //maybe not necessary? don't see a change in the table
+// Campus.hasMany(Student) //maybe not necessary? don't see a change in the table
+Campus.belongsToMany(Student, {through: 'CampusStudent'})
+Campus.hasMany(Student, {as: 'Students'})

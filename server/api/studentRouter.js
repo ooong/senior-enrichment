@@ -13,10 +13,15 @@ studentRouter.get('/', function (req, res, next) {
 
 
 // GET api/students/:id
+// studentRouter.get('/:id', function (req, res, next) {
+//     Student.findOne({where: {id: req.params.id} })
+//     .then(student => res.json(student))
+// })
+
+// GET api/students/:id
 studentRouter.get('/:id', function (req, res, next) {
-    Student.findOne({where: {id: req.params.id}})
+    Student.findOne({where: {id: req.params.id}, include: [Campus] })
     .then(student => res.json(student))
-    // res.send("student test!");
 })
 
 // POST api/students/

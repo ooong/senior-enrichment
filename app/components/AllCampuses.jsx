@@ -1,6 +1,7 @@
 import React, { Component} from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import AddCampus from './AddCampus'
 
 export default class AllCampuses extends Component {
     constructor () {
@@ -36,6 +37,7 @@ export default class AllCampuses extends Component {
                 )
             })}
             </ul>
+            <AddCampus />
             </div>
             
         )
