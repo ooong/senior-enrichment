@@ -1,11 +1,47 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box; 
+}
 
+  
+  body {
+    padding-bottom: 56px; }
 
+a {
+    text-decoration: none
+}
 
+a:visited {
+    text-decoration: none
+}
+
+ul {
+    list-style-type: none
+}
 
 .campus-item {
-    background-color: green;
+    font-size: 30px;
 }
 
 .nav-bar {
     background-color: goldenrod;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
+
+.nav-item {
+    height: 1.5em;
+    margin: 0 1.5em 0 0;
+    font-size: 40px;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+    grid-auto-rows: minmax(100px, auto);
+    margin: 40px;
+  }
+

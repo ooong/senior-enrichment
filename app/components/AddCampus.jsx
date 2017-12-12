@@ -28,31 +28,31 @@ export default class AddCampus extends Component {
         this.setState({[event.target.name]: event.target.value})
     }
 
-    handleSubmit(event) {
+    handleSubmit (event) {
         event.preventDefault();
-        axios.post('api/campuses', {
+        const campus = {
             name: this.state.campusName,
             imgUrl: this.state.imgUrl,
-            description: this.state.description
-        })
-        this.setState({campusName: "", imgUrl: "", campusDescription: ""})
+            description: this.state.campusDescription
+        }
+        this.props.addNewCampus(campus);
+        this.setState({campusName: '', imgUrl: '', campusDescription: ''})
     }
 
 
     render() {
 
         const campuses = this.state.campuses
-        console.log("campuses",campuses)
 
         return (
 
             <form id="new-campus-form" onSubmit={this.handleSubmit}>
-                <h4>Add a new campus</h4>
+                <h2>Add a new campus</h2>
                     <input
                         className="form-control"
                         type="text"
                         name="campusName"
-                        value={this.state.name}
+                        value={this.state.campusName}
                         onChange={this.handleChange}
                         placeholder="Campus name" />
 
@@ -60,7 +60,7 @@ export default class AddCampus extends Component {
                         className="form-control"
                         type="text"
                         name="campusDescription"
-                        value={this.state.description}
+                        value={this.state.campusDescription}
                         onChange={this.handleChange}
                         placeholder="Campus description" />
 

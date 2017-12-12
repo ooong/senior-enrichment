@@ -11,25 +11,8 @@ campusRouter.get('/', function (req, res, next) {
     .then(campuses => res.json(campuses))
 })
 
-// // GET api/campuses/:id
-// campusRouter.get('/:id', function (req, res, next) {
-//     Campus.findOne({where: {id: req.params.id}})
-//     .then(campus => res.json(campus))
-// })
 
-
-// GET api/campuses/:id all students for a campus
-// campusRouter.get('/:id', function (req, res, next) {
-//     Campus.findOne({where: {id: req.params.id}})
-//     .then(campus => {
-//         return Promise.all(campus.getStudents())
-//     })
-//     .then(students => {
-//         console.log(students)
-//     })
-// })
-
-// GET api/campuses/:id all students for a campus
+// GET api/campuses/:id 
 campusRouter.get('/:id', function (req, res, next) {
     Campus.findOne({where: {id: req.params.id}})
     .then(campus => {
@@ -39,19 +22,13 @@ campusRouter.get('/:id', function (req, res, next) {
 })
 
 
-
-
-
-
-
-
 // POST api/campuses/
 campusRouter.post('/', function (req, res, next) {
     Campus.create(req.body)
     .then(function(createdCampus) {
         res.json({
             message: 'woohoo!',
-            student: createdCampus
+            campus: createdCampus
         })
     })
 })

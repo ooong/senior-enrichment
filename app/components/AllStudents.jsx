@@ -9,6 +9,7 @@ export default class AllStudents extends Component {
         this.state = {
             students: []
         }
+        this.addNewStudent = this.addNewStudent.bind(this);
     }
 
 
@@ -16,6 +17,24 @@ export default class AllStudents extends Component {
         axios.get('/api/students')
         .then(res => res.data)
         .then(students => this.setState( {students} ))
+    }
+
+    addNewStudent (student) {
+        axios.post('/api/students', {
+            firstName: student.firstName,
+            lastName: student.lastName,
+            email: student.email,
+            gpa: student.gpa,
+            if (studentCampus) {
+                campusId: this.studentCampus.id
+            }  
+        })
+        .then(res => res.data.student)
+        .then(student => {
+            this.setState({
+                students: this.state.students.concat(student)
+            })
+        })
     }
 
 
@@ -26,12 +45,13 @@ export default class AllStudents extends Component {
             
             <div>
             <h1>Welcome to the All Students component</h1>
-            <AddStudent />
+            <AddStudent addNewStudent={this.addNewStudent}/>
             <ul>
             {students.map(student => {
                 return (
                     <li className="student-item" key={student.id}>
                     <Link to={`/students/${student.id}`}>{student.name}</Link>
+                    <button>DELETE</button>
                     </li>)
             })}
             </ul>

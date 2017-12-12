@@ -9,9 +9,9 @@ export default class AddStudent extends Component {
             firstName: "",
             lastName: "",
             email: "",
+            gpa: 0,
             studentCampus: {},
             campuses: []
-
         }
        
         this.handleChange = this.handleChange.bind(this);
@@ -26,28 +26,25 @@ export default class AddStudent extends Component {
 
 
     handleChange(event) {
-        if (event.target.name === "studentName") {
-            this.setState({studentName: event.target.value})
-        }
-        if (event.target.name === "studentCampus") {
-            this.setState({studentCampus: event.target.value})
-        }
+
+        this.setState({[event.target.name]: event.target.value})
     }
 
-    handleSubmit(event) {
-        // save this.state.value to the database as a new student
+    handleSubmit (event) {
         event.preventDefault();
-        // axios.post('api/students', {
-        //     firstName: 
-        // })
-
+        const student = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            gpa: this.state.gpa,
+        }
+        this.props.addNewStudent(student);
+        this.setState({firstName: '', lastName: '', email: '', gpa: 0})
     }
-
 
     render() {
 
         const campuses = this.state.campuses
-        console.log("campuses",campuses)
 
         return (
 
@@ -56,10 +53,34 @@ export default class AddStudent extends Component {
                     <input
                         className="form-control"
                         type="text"
-                        name="studentName"
-                        value={this.state.studentName}
+                        name="firstName"
+                        value={this.state.firstName}
                         onChange={this.handleChange}
-                        placeholder="Student Name" />
+                        placeholder="Student First Name" />
+
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="lastName"
+                        value={this.state.lastName}
+                        onChange={this.handleChange}
+                        placeholder="Student Last Name" />
+
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        placeholder="Student Email" />
+
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="gpa"
+                        value={this.state.gpa}
+                        onChange={this.handleChange}
+                        placeholder="Student gpa" />
                
                     
                     <select 

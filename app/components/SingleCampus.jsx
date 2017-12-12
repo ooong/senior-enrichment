@@ -9,9 +9,11 @@ export default class SingleCampus extends Component {
     constructor () {
         super ();
         this.state = {
-            campus: {}
+            campus: {},
+            students: []
         }
         this.fetchCampus = this.fetchCampus.bind(this);
+        this.fetchStudents = this.fetchStudents.bind(this);
     }
 
     fetchCampus (campusId) {
@@ -20,32 +22,42 @@ export default class SingleCampus extends Component {
         .then(campus => this.setState({ campus }))
     }
 
+    fetchStudents () {
+        axios.get('/api/students/')
+        .then(res => res.data)
+        .then(students => this.setState({ students }))
+    }
+
 
     componentDidMount () {
         const campusId = this.props.match.params.campusId;
         this.fetchCampus(campusId)
-
+        this.fetchStudents();
     }
 
-
-    componentWillReceiveProps (nextProps) {
-        const campus = nextProps.match.params.campusId
-        this.setState({ campus })
-    }
 
     render () {
         const campus = this.state.campus;
+        const students = this.state.students && this.state.students.filter(student => student.campusId === this.state.campus.id)
+
         return (
             <div>
             <h1>Welcome to the Single Campus Component</h1>
                 <h2>CampusName: {campus.name}</h2>
                 <h3>CampusId: {campus.id}</h3>
+                <img src= {campus.imgUrl} />
                 <h3>CampusDescription: {campus.description}</h3>
                 <h3>Students:</h3>
                 <ul>
-                    <li>placeholder student 1</li>
-                    <li>placeholder student 2</li>
-                    <li>placeholder student 3</li>
+                {
+                    students.map(student => {
+                        return (
+                            <li className="student-item" key={student.id}>
+                            <Link to={`/students/${student.id}`}>{student.name}</Link>
+                            <button onClick={this.handleClick}>DELETE STUDENT</button>
+                            </li>)
+                    }) 
+                }
                 </ul>
                 <EditCampus campus={this.state.campus}/>
             </div>
